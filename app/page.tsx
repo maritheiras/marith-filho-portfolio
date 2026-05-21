@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ContactButton } from "@/components/contact-provider";
+import { ExperienceTimeline } from "@/components/experience-timeline";
 import { HeroSocials } from "@/components/hero-socials";
 import { DownloadIcon } from "@/components/icons";
 import { ProjectGrid } from "@/components/project-grid";
@@ -120,7 +121,9 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="experience-timeline">
+        <ExperienceTimeline experiences={experiences} />
+
+        <div className="experience-timeline experience-timeline-static">
           {experiences.map((experience) => (
             <article
               className={`experience-card experience-card-${experience.side}${experience.current ? " is-current" : ""}`}

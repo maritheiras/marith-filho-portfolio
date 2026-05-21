@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { Project } from "@/lib/projects";
 import { StackList } from "@/lib/stacks";
 
@@ -12,11 +12,26 @@ export function ProjectGrid({ projects, visibleCount }: { projects: Project[]; v
   const [expanded, setExpanded] = useState(false);
   const [animateExtra, setAnimateExtra] = useState(false);
   const [isCollapsing, setIsCollapsing] = useState(false);
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
   const collapseTimer = useRef<number | null>(null);
+  const mobileTrackRef = useRef<HTMLDivElement | null>(null);
   const hasHiddenProjects = projects.length > visibleCount;
   const visibleProjects = projects.slice(0, visibleCount);
   const extraProjects = projects.slice(visibleCount);
   const shouldRenderExtraProjects = expanded || isCollapsing;
+
+  const updateMobileScrollState = useCallback(() => {
+    const track = mobileTrackRef.current;
+
+    if (!track) {
+      return;
+    }
+
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    setCanScrollPrev(track.scrollLeft > 8);
+    setCanScrollNext(track.scrollLeft < maxScroll - 8);
+  }, []);
 
   useEffect(() => {
     if (!expanded || isCollapsing) {
@@ -38,6 +53,16 @@ export function ProjectGrid({ projects, visibleCount }: { projects: Project[]; v
       }
     };
   }, []);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(updateMobileScrollState);
+    window.addEventListener("resize", updateMobileScrollState);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("resize", updateMobileScrollState);
+    };
+  }, [projects.length, updateMobileScrollState]);
 
   const toggleProjects = () => {
     if (!expanded) {
@@ -65,42 +90,97 @@ export function ProjectGrid({ projects, visibleCount }: { projects: Project[]; v
     }, extraProjectAnimationMs);
   };
 
-  return (
-    <div className="project-board">
-      <div className="project-grid">
-        {visibleProjects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
-      </div>
+  const scrollMobileProjects = (direction: "prev" | "next") => {
+    const track = mobileTrackRef.current;
 
-      <div className={`project-extra-wrap ${expanded ? "is-expanded" : ""} ${isCollapsing ? "is-collapsing" : ""}`}>
-        {shouldRenderExtraProjects ? (
-          <div className="project-grid project-extra-grid">
-            {extraProjects.map((project, extraIndex) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                className={`project-card-extra ${animateExtra ? "is-visible" : ""} ${isCollapsing ? "is-collapsing" : ""}`}
-                style={{ "--extra-delay": `${Math.min(extraIndex * 0.08, 0.28)}s` } as CSSProperties}
-              />
-            ))}
+    if (!track) {
+      return;
+    }
+
+    const firstCard = track.querySelector<HTMLElement>(".project-card");
+    const gap = 14;
+    const scrollAmount = (firstCard?.offsetWidth ?? track.clientWidth * 0.84) + gap;
+
+    track.scrollBy({
+      left: direction === "next" ? scrollAmount : -scrollAmount,
+      behavior: "smooth"
+    });
+  };
+
+  return (
+    <>
+      <div className="project-board project-board-desktop">
+        <div className="project-grid">
+          {visibleProjects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </div>
+
+        <div className={`project-extra-wrap ${expanded ? "is-expanded" : ""} ${isCollapsing ? "is-collapsing" : ""}`}>
+          {shouldRenderExtraProjects ? (
+            <div className="project-grid project-extra-grid">
+              {extraProjects.map((project, extraIndex) => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  className={`project-card-extra ${animateExtra ? "is-visible" : ""} ${isCollapsing ? "is-collapsing" : ""}`}
+                  style={{ "--extra-delay": `${Math.min(extraIndex * 0.08, 0.28)}s` } as CSSProperties}
+                />
+              ))}
+            </div>
+          ) : null}
+        </div>
+
+        {hasHiddenProjects ? (
+          <div className="project-more-row">
+            <button
+              className="project-more-button"
+              type="button"
+              aria-expanded={expanded}
+              onClick={toggleProjects}
+            >
+              {expanded ? "Ver menos projetos" : "Ver mais projetos"}
+            </button>
           </div>
         ) : null}
       </div>
 
-      {hasHiddenProjects ? (
-        <div className="project-more-row">
-          <button
-            className="project-more-button"
-            type="button"
-            aria-expanded={expanded}
-            onClick={toggleProjects}
-          >
-            {expanded ? "Ver menos projetos" : "Ver mais projetos"}
-          </button>
+      <div className="project-mobile-board">
+        <div className={`project-mobile-viewport ${canScrollPrev ? "has-prev" : ""} ${canScrollNext ? "has-next" : ""}`}>
+          {canScrollPrev ? (
+            <button
+              className="project-mobile-arrow project-mobile-arrow-prev"
+              type="button"
+              aria-label="Projeto anterior"
+              onClick={() => scrollMobileProjects("prev")}
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M15 6l-6 6 6 6" />
+              </svg>
+            </button>
+          ) : null}
+
+          <div className="project-grid project-mobile-grid" ref={mobileTrackRef} onScroll={updateMobileScrollState}>
+            {projects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+
+          {canScrollNext ? (
+            <button
+              className="project-mobile-arrow project-mobile-arrow-next"
+              type="button"
+              aria-label="Proximo projeto"
+              onClick={() => scrollMobileProjects("next")}
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9 6l6 6-6 6" />
+              </svg>
+            </button>
+          ) : null}
         </div>
-      ) : null}
-    </div>
+      </div>
+    </>
   );
 }
 
