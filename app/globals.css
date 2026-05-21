@@ -2355,6 +2355,26 @@ section[id] {
     transition: min-height 0.9s var(--ease);
   }
 
+  .experience-timeline-interactive,
+  .experience-timeline-interactive *,
+  .experience-timeline-interactive *::before,
+  .experience-timeline-interactive *::after {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+    -webkit-touch-callout: none;
+  }
+
+  .experience-timeline-interactive,
+  .experience-timeline-interactive .experience-card,
+  .experience-timeline-interactive .experience-card-inner {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .experience-timeline-interactive .experience-card:focus,
+  .experience-timeline-interactive .experience-card:focus-visible {
+    outline: none;
+  }
+
   .experience-timeline::before {
     display: none;
   }
