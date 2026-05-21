@@ -1,10 +1,10 @@
 export const siteConfig = {
   name: "Márith Filho",
-  title: "Márith Filho | Desenvolvedor de Software",
+  title: "Portfólio | Márith Filho",
   description:
-    "Portfólio de Márith Filho, Desenvolvedor de Software com vivência em sistemas, dados operacionais e produtos web.",
+    "Conheça meu trabalho em sistemas de informação, automação e desenvolvimento de produtos digitais.",
   url: "https://marithfilho.com",
-  seoImage: "/assets/foto-perfil-seo.jpeg",
+  seoImage: "/assets/og-marith-filho.jpg",
   email: "marith.eiras@gmail.com",
   phone: "5522998841370",
   github: "https://github.com/maritheiras",

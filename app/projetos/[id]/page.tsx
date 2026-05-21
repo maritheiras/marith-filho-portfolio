@@ -12,6 +12,7 @@ type ProjectPageProps = {
 };
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? siteConfig.url;
+const seoImageUrl = new URL(siteConfig.seoImage, siteUrl).toString();
 
 export function generateStaticParams() {
   return projects.map((project) => ({
@@ -43,9 +44,9 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
       siteName: "Márith Filho Portfolio",
       images: [
         {
-          url: siteConfig.seoImage,
+          url: seoImageUrl,
           width: 1200,
-          height: 1600,
+          height: 630,
           alt: project.title
         }
       ]
@@ -54,7 +55,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
       card: "summary_large_image",
       title: `${project.title} | Márith Filho`,
       description: project.summary,
-      images: [siteConfig.seoImage]
+      images: [seoImageUrl]
     }
   };
 }

@@ -8,6 +8,7 @@ import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? siteConfig.url;
+const seoImageUrl = new URL(siteConfig.seoImage, siteUrl).toString();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -43,9 +44,9 @@ export const metadata: Metadata = {
     siteName: "Márith Filho Portfolio",
     images: [
       {
-        url: siteConfig.seoImage,
+        url: seoImageUrl,
         width: 1200,
-        height: 1600,
+        height: 630,
         alt: "Márith Filho"
       }
     ]
@@ -54,7 +55,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.title,
     description: siteConfig.description,
-    images: [siteConfig.seoImage]
+    images: [seoImageUrl]
   },
   icons: {
     icon: "/favicon.svg"
