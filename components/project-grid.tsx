@@ -97,12 +97,26 @@ export function ProjectGrid({ projects, visibleCount }: { projects: Project[]; v
       return;
     }
 
-    const firstCard = track.querySelector<HTMLElement>(".project-card");
-    const gap = 14;
-    const scrollAmount = (firstCard?.offsetWidth ?? track.clientWidth * 0.84) + gap;
+    const cards = Array.from(track.querySelectorAll<HTMLElement>(".project-card"));
 
-    track.scrollBy({
-      left: direction === "next" ? scrollAmount : -scrollAmount,
+    if (cards.length === 0) {
+      return;
+    }
+
+    const viewportCenter = track.scrollLeft + track.clientWidth / 2;
+    const currentIndex = cards.reduce((closestIndex, card, index) => {
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      const closestCard = cards[closestIndex];
+      const closestCenter = closestCard.offsetLeft + closestCard.offsetWidth / 2;
+
+      return Math.abs(cardCenter - viewportCenter) < Math.abs(closestCenter - viewportCenter) ? index : closestIndex;
+    }, 0);
+    const targetIndex = Math.max(0, Math.min(cards.length - 1, currentIndex + (direction === "next" ? 1 : -1)));
+    const targetCard = cards[targetIndex];
+    const targetLeft = targetCard.offsetLeft - (track.clientWidth - targetCard.offsetWidth) / 2;
+
+    track.scrollTo({
+      left: targetLeft,
       behavior: "smooth"
     });
   };

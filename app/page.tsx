@@ -197,7 +197,9 @@ export default function HomePage() {
       <section className="section-shell contact-section" id="contato">
         <div className="section-heading">
           <h2>Vamos conversar sobre o próximo desafio?</h2>
-          <p className="section-description">Aberto a oportunidades como Desenvolvedor de Software e Engenharia de Software.</p>
+          <p className="section-description">
+            Aberto a oportunidades como Desenvolvedor de Software e <span className="text-nowrap">Engenharia de Software.</span>
+          </p>
         </div>
 
         <div className="contact-actions">
