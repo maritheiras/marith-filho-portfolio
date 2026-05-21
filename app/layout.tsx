@@ -46,7 +46,7 @@ export const metadata: Metadata = {
       {
         url: seoImageUrl,
         width: 1200,
-        height: 630,
+        height: 1600,
         alt: "Márith Filho"
       }
     ]
