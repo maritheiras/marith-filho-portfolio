@@ -117,9 +117,7 @@ export function ScrollReveal() {
     ];
     const queuedTimers = [window.setTimeout(prepare, 160), window.setTimeout(prepare, 500), window.setTimeout(prepare, 1100)];
 
-    const mutationObserver = new MutationObserver(() => {
-      window.requestAnimationFrame(prepare);
-    });
+    const mutationObserver = new MutationObserver(schedulePrepare);
 
     mutationObserver.observe(document.body, {
       childList: true,
@@ -128,7 +126,6 @@ export function ScrollReveal() {
       attributeFilter: ["hidden"]
     });
 
-    window.addEventListener("scroll", schedulePrepare, { passive: true });
     window.addEventListener("hashchange", schedulePrepare);
     window.addEventListener("resize", schedulePrepare);
 
@@ -143,7 +140,6 @@ export function ScrollReveal() {
 
       queuedFrames.forEach((frame) => window.cancelAnimationFrame(frame));
       queuedTimers.forEach((timer) => window.clearTimeout(timer));
-      window.removeEventListener("scroll", schedulePrepare);
       window.removeEventListener("hashchange", schedulePrepare);
       window.removeEventListener("resize", schedulePrepare);
       observer?.disconnect();

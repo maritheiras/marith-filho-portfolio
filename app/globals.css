@@ -2405,7 +2405,7 @@ section[id] {
     border-color: var(--border-default);
     border-radius: 999px;
     background: rgba(0, 0, 0, 0.72);
-    backdrop-filter: blur(18px);
+    backdrop-filter: none;
   }
 
   .brand-text {
@@ -2472,7 +2472,7 @@ section[id] {
     border-radius: var(--radius-card);
     background: rgba(0, 0, 0, 0.94);
     box-shadow: var(--shadow-soft);
-    backdrop-filter: blur(16px);
+    backdrop-filter: none;
   }
 
   .site-nav.is-open {
@@ -2560,8 +2560,8 @@ section[id] {
     grid-template-rows: minmax(0, 1fr) auto;
     row-gap: clamp(32px, 7svh, 62px);
     align-items: stretch;
+    min-height: 100vh;
     min-height: 100svh;
-    min-height: 100dvh;
     padding: 104px 0 28px;
   }
 
@@ -2657,6 +2657,15 @@ section[id] {
     align-items: flex-start;
     flex-direction: column;
     gap: 6px;
+  }
+
+  .hero-animate,
+  .scroll-reveal,
+  .project-card.scroll-reveal,
+  .project-card-extra,
+  .project-card-extra.scroll-reveal {
+    filter: none;
+    will-change: opacity, transform;
   }
 
   .education-grid {
