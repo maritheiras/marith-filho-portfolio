@@ -3,7 +3,7 @@ export const siteConfig = {
   title: "Márith Filho | Desenvolvedor de Software Full Stack",
   description:
     "Portfólio de Márith Filho, Desenvolvedor de Software Full Stack com vivência em sistemas, dados operacionais e produtos web.",
-  url: "https://marith-filho-portfolio.vercel.app",
+  url: "https://marithfilho.com",
   email: "marith.eiras@gmail.com",
   phone: "5522998841370",
   github: "https://github.com/maritheiras",

@@ -91,7 +91,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <Link className="project-back" href="/#projetos">
           Voltar aos projetos
         </Link>
-        <span className={`project-detail-status ${project.isLive ? "is-live" : ""}`}>{project.status}</span>
+        <span className={`project-detail-status ${project.isLive ? "is-live" : ""}`}>
+          <span className="project-detail-status-text">{project.status}</span>
+        </span>
         <h1>{project.title}</h1>
         <p>{project.summary}</p>
         <div className="project-detail-actions">
