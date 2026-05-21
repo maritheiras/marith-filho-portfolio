@@ -40,9 +40,15 @@ export function Header() {
               {item.label}
             </Link>
           ))}
-          <a className="mobile-nav-extra" href={siteConfig.resume} download onClick={closeNav}>
-            Currículo
-          </a>
+          <div className="mobile-nav-actions" aria-label="Ações rápidas">
+            <a className="mobile-nav-resume" href={siteConfig.resume} download onClick={closeNav}>
+              Currículo
+              <DownloadIcon className="inline-icon" />
+            </a>
+            <ContactButton className="mobile-nav-contact" onClick={closeNav}>
+              Fale comigo
+            </ContactButton>
+          </div>
         </nav>
 
         <div className="header-actions">

@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { ContactProvider } from "@/components/contact-provider";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+import { ScrollReveal } from "@/components/scroll-reveal";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -85,6 +86,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
           <Header />
           {children}
           <Footer />
+          <ScrollReveal />
         </ContactProvider>
       </body>
     </html>

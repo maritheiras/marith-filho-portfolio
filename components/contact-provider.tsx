@@ -122,11 +122,20 @@ export function ContactProvider({ children }: { children: ReactNode }) {
   );
 }
 
-export function ContactButton({ className, children }: { className: string; children: ReactNode }) {
+export function ContactButton({ className, children, onClick }: { className: string; children: ReactNode; onClick?: () => void }) {
   const { openContact, isOpen } = useContactModal();
 
   return (
-    <button className={className} type="button" aria-expanded={isOpen} aria-controls="contact-popover" onClick={openContact}>
+    <button
+      className={className}
+      type="button"
+      aria-expanded={isOpen}
+      aria-controls="contact-popover"
+      onClick={() => {
+        onClick?.();
+        openContact();
+      }}
+    >
       {children}
     </button>
   );

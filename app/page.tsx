@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ContactButton } from "@/components/contact-provider";
 import { HeroSocials } from "@/components/hero-socials";
+import { DownloadIcon } from "@/components/icons";
 import { ProjectGrid } from "@/components/project-grid";
 import { StackMarquee } from "@/components/stack-marquee";
 import { projects, visibleProjectCount } from "@/lib/projects";
@@ -94,19 +95,13 @@ export default function HomePage() {
           <span />
         </div>
         <div className="hero-content">
-          <p className="eyebrow hero-eyebrow hero-animate hero-animate-1">Portfólio de Software</p>
-          <h1 className="hero-title hero-animate hero-animate-2" aria-label="Software para produtos reais.">
-            <span className="title-desktop">Software para</span>
-            <span className="title-desktop">produtos reais.</span>
-            <span className="title-mobile" aria-hidden="true">Software</span>
-            <span className="title-mobile" aria-hidden="true">para</span>
-            <span className="title-mobile" aria-hidden="true">produtos</span>
-            <span className="title-mobile" aria-hidden="true">reais.</span>
+          <p className="eyebrow hero-eyebrow hero-animate hero-animate-1">Sistemas Escaláveis</p>
+          <h1 className="hero-title hero-animate hero-animate-2" aria-label="Software para Produtos Reais.">
+            <span>Software para</span>
+            <span>Produtos Reais.</span>
           </h1>
           <p className="hero-copy hero-animate hero-animate-3">
-            Eu sou Márith Filho, <strong>Bacharel em Sistemas de Informação</strong>, com vivência em implantação de sistemas,
-            dados operacionais e desenvolvimento de sistemas. Atuo como <strong>Desenvolvedor Full Stack</strong>, conectando
-            produto e automação para criar soluções digitais consistentes.
+            Conheça meu trabalho em sistemas de informação, automação e desenvolvimento de produtos digitais.
           </p>
 
           <div className="hero-meta hero-animate hero-animate-4">
@@ -118,8 +113,8 @@ export default function HomePage() {
       </section>
 
       <section className="section-shell section-block experience-section" id="experiencia">
-        <div className="experience-heading">
-          <h2>Experiência.</h2>
+        <div className="section-heading">
+          <h2>Experiência profissional.</h2>
           <p className="section-description">
             Trajetória conectando implantação de sistemas, dados operacionais e desenvolvimento de produtos digitais.
           </p>
@@ -162,10 +157,44 @@ export default function HomePage() {
         <ProjectGrid projects={projects} visibleCount={visibleProjectCount} />
       </section>
 
+      <section className="section-shell section-block about-section" id="sobre">
+        <div className="section-heading about-heading">
+          <h2>Resumo pessoal.</h2>
+          <p className="section-description">
+            Uma visão breve sobre minha formação e meu foco em soluções digitais para operação, automação e produto.
+          </p>
+        </div>
+
+        <div className="about-content">
+          <div className="about-portrait-wrap">
+            <img className="about-portrait" src="/assets/foto-perfil-seo.jpeg" alt="Foto de Márith Filho" />
+          </div>
+
+          <div className="about-details">
+            <div className="about-text">
+              <p>
+                Me chamo <strong>Márith Eiras Scot Filho</strong>, sou Bacharel em Sistemas de Informação pelo
+                Instituto Federal Fluminense e sigo aprofundando minha formação em <strong>desenvolvimento de sistemas</strong>,{" "}
+                engenharia de software e soluções digitais.
+              </p>
+              <p>
+                Meu foco profissional está em transformar necessidades reais em produtos web, <strong>automações</strong> e
+                sistemas bem estruturados, com atenção para usabilidade, organização de dados e evolução contínua.
+              </p>
+            </div>
+
+            <a className="button button-secondary about-resume" href={siteConfig.resume} download>
+              Baixar currículo
+              <DownloadIcon className="inline-icon" />
+            </a>
+          </div>
+        </div>
+      </section>
+
       <section className="section-shell contact-section" id="contato">
-        <div>
+        <div className="section-heading">
           <h2>Vamos conversar sobre o próximo desafio?</h2>
-          <p>Aberto a oportunidades como Desenvolvedor de Software e Engenharia de Software.</p>
+          <p className="section-description">Aberto a oportunidades como Desenvolvedor de Software e Engenharia de Software.</p>
         </div>
 
         <div className="contact-actions">
