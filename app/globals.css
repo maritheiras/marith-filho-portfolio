@@ -130,6 +130,10 @@ h1 {
   color: transparent;
 }
 
+.title-mobile {
+  display: none !important;
+}
+
 h2 {
   margin-bottom: 0;
   background: linear-gradient(180deg, #ffffff 0%, #f4f4f5 45%, #a1a1aa 100%);
@@ -1868,6 +1872,8 @@ section[id] {
   .hero-content {
     grid-column: 1;
     grid-row: 1;
+    width: min(100%, calc(100vw - 32px));
+    overflow: hidden;
   }
 
   .hero-visual {
@@ -1958,7 +1964,8 @@ section[id] {
 
 @media (max-width: 760px) {
   h1 {
-    font-size: 62px;
+    max-width: 100%;
+    font-size: clamp(48px, 13vw, 58px);
     line-height: 1.03;
   }
 
@@ -2095,7 +2102,16 @@ section[id] {
   }
 
   .hero-title {
+    width: min(100%, calc(100vw - 32px));
     gap: 8px;
+  }
+
+  .title-desktop {
+    display: none !important;
+  }
+
+  .title-mobile {
+    display: block !important;
   }
 
   .eyebrow {
@@ -2103,9 +2119,9 @@ section[id] {
   }
 
   .hero-copy {
-    width: min(340px, calc(100vw - 32px));
+    width: min(286px, calc(100vw - 80px));
     max-width: 100%;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.5;
     white-space: normal;
   }
@@ -2273,7 +2289,7 @@ section[id] {
 
 @media (max-width: 420px) {
   h1 {
-    font-size: 56px;
+    font-size: clamp(46px, 12.4vw, 52px);
   }
 
   h2 {

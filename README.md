@@ -1,13 +1,13 @@
 # Marith Filho Portfolio
 
-Portfólio profissional de Márith Filho, criado para apresentar trajetória, experiências, projetos e formas de contato em uma interface moderna, limpa e responsiva.
+Portfólio profissional de Márith Filho, reconstruído em Next.js para melhorar SEO, performance, organização de conteúdo e páginas individuais de projeto.
 
 ## Stack
 
-- HTML
+- Next.js
+- React
+- TypeScript
 - CSS
-- JavaScript
-- Next.js, planejado para a próxima evolução do projeto
 
 ## Recursos
 
@@ -15,8 +15,16 @@ Portfólio profissional de Márith Filho, criado para apresentar trajetória, ex
 - Lista de stacks em movimento
 - Timeline de experiências
 - Vitrine de projetos com páginas individuais de detalhe
+- Metadata, Open Graph, Twitter Card, sitemap, robots e JSON-LD
 - Modal de contato com e-mail, WhatsApp, LinkedIn e GitHub
 - Currículo disponível para download
+
+## Rodando localmente
+
+```bash
+npm install
+npm run dev
+```
 
 ## Links
 
