@@ -43,9 +43,9 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
       siteName: "Márith Filho Portfolio",
       images: [
         {
-          url: "/assets/programming-lifestyle.png",
+          url: siteConfig.seoImage,
           width: 1200,
-          height: 630,
+          height: 1600,
           alt: project.title
         }
       ]
@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
       card: "summary_large_image",
       title: `${project.title} | Márith Filho`,
       description: project.summary,
-      images: ["/assets/programming-lifestyle.png"]
+      images: [siteConfig.seoImage]
     }
   };
 }

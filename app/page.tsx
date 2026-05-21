@@ -7,7 +7,9 @@ import { projects, visibleProjectCount } from "@/lib/projects";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Desenvolvedor de Software Full Stack",
+  title: {
+    absolute: siteConfig.title
+  },
   alternates: {
     canonical: "/"
   }
@@ -117,7 +119,10 @@ export default function HomePage() {
 
       <section className="section-shell section-block experience-section" id="experiencia">
         <div className="experience-heading">
-          <h2>Experiência</h2>
+          <h2>Experiência.</h2>
+          <p className="section-description">
+            Trajetória conectando implantação de sistemas, dados operacionais e desenvolvimento de produtos digitais.
+          </p>
         </div>
 
         <div className="experience-timeline">
@@ -149,6 +154,9 @@ export default function HomePage() {
       <section className="section-shell section-block" id="projetos">
         <div className="section-heading">
           <h2>Projetos reais.</h2>
+          <p className="section-description">
+            Soluções publicadas e repositórios que mostram produto, automação e interfaces pensadas para uso real.
+          </p>
         </div>
 
         <ProjectGrid projects={projects} visibleCount={visibleProjectCount} />

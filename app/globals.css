@@ -15,7 +15,7 @@
   --accent-purple: #a78bfa;
   --accent-cyan: #22d3ee;
   --accent-green: #34d399;
-  --gradient-ring: linear-gradient(90deg, #22d3ee, #a78bfa, #f472b6, #facc15);
+  --gradient-ring: linear-gradient(90deg, #22d3ee, #a78bfa, #f472b6, #facc15, #22d3ee);
   --gradient-surface: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.01));
   --shadow-soft: 0 24px 70px rgba(0, 0, 0, 0.52);
   --radius-card: 16px;
@@ -219,10 +219,12 @@ body.nav-open .site-header-inner {
 .brand-text::before {
   content: "/";
   background: var(--gradient-ring);
+  background-size: 220% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   margin-right: 8px;
+  animation: gradient-flow 5.5s linear infinite;
 }
 
 .site-nav {
@@ -702,6 +704,16 @@ section[id] {
   animation-delay: 0.7s;
 }
 
+@keyframes gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 220% 50%;
+  }
+}
+
 @keyframes hero-reveal {
   0% {
     opacity: 0;
@@ -747,8 +759,10 @@ section[id] {
   background:
     linear-gradient(var(--background), var(--background)) padding-box,
     var(--gradient-ring) border-box;
+  background-size: auto, 220% 100%;
   color: var(--text-primary);
   padding: 7px 13px;
+  animation: gradient-flow 6s linear infinite;
 }
 
 .hero-copy {
@@ -1160,14 +1174,22 @@ section[id] {
   margin-bottom: 34px;
 }
 
+.section-description {
+  max-width: 680px;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 18px;
+  line-height: 1.5;
+}
+
 .experience-section {
   padding-top: var(--section-gap);
 }
 
 .experience-heading {
-  display: flex;
-  align-items: center;
+  display: grid;
   gap: 12px;
+  max-width: 700px;
   margin-bottom: 54px;
 }
 
@@ -1271,8 +1293,10 @@ section[id] {
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: var(--accent-green);
+  background: var(--gradient-ring);
+  background-size: 220% 100%;
   box-shadow: 0 0 18px rgba(52, 211, 153, 0.45);
+  animation: gradient-flow 5.5s linear infinite;
 }
 
 .experience-card-top {
@@ -1302,10 +1326,18 @@ section[id] {
   border: 1px solid rgba(52, 211, 153, 0.22);
   border-radius: 999px;
   background: rgba(52, 211, 153, 0.07);
-  color: var(--accent-green);
+  color: var(--text-primary);
   font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
+}
+
+.experience-status {
+  background:
+    linear-gradient(var(--surface), var(--surface)) padding-box,
+    var(--gradient-ring) border-box;
+  background-size: auto, 220% 100%;
+  animation: gradient-flow 5.5s linear infinite;
 }
 
 .experience-status::before {
@@ -1313,7 +1345,9 @@ section[id] {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: currentColor;
+  background: var(--gradient-ring);
+  background-size: 220% 100%;
+  animation: gradient-flow 5.5s linear infinite;
 }
 
 .experience-card h3 {
@@ -1401,7 +1435,19 @@ section[id] {
 }
 
 .project-card-live {
-  border-color: rgba(52, 211, 153, 0.24);
+  border-color: transparent;
+  background:
+    var(--gradient-surface) padding-box,
+    var(--gradient-ring) border-box;
+  background-size: auto, 220% 100%;
+  animation: gradient-flow 5.5s linear infinite;
+}
+
+.project-card-live:hover {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.014)) padding-box,
+    var(--gradient-ring) border-box;
+  background-size: auto, 220% 100%;
 }
 
 .project-card-featured {
@@ -1439,9 +1485,11 @@ section[id] {
 
 .status-dot:not(.status-muted) {
   background: var(--gradient-ring);
+  background-size: 220% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  animation: gradient-flow 5.5s linear infinite;
 }
 
 .status-dot::before {
@@ -1458,9 +1506,11 @@ section[id] {
 
 .status-dot:not(.status-muted)::before {
   background: var(--gradient-ring);
+  background-size: 220% 100%;
   box-shadow:
     0 0 10px rgba(34, 211, 238, 0.55),
     0 0 18px rgba(250, 204, 21, 0.28);
+  animation: gradient-flow 5.5s linear infinite;
 }
 
 .status-muted {
@@ -1708,14 +1758,18 @@ section[id] {
   background:
     linear-gradient(var(--background), var(--background)) padding-box,
     var(--gradient-ring) border-box;
+  background-size: auto, 220% 100%;
   color: var(--text-primary);
+  animation: gradient-flow 5.5s linear infinite;
 }
 
 .project-detail-status.is-live .project-detail-status-text {
   background: var(--gradient-ring);
+  background-size: 220% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  animation: gradient-flow 5.5s linear infinite;
 }
 
 .project-detail-hero h1 {

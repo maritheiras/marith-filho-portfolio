@@ -42,10 +42,10 @@ export const metadata: Metadata = {
     siteName: "Márith Filho Portfolio",
     images: [
       {
-        url: "/assets/programming-lifestyle.png",
+        url: siteConfig.seoImage,
         width: 1200,
-        height: 630,
-        alt: "Portfólio de Márith Filho"
+        height: 1600,
+        alt: "Márith Filho"
       }
     ]
   },
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.title,
     description: siteConfig.description,
-    images: ["/assets/programming-lifestyle.png"]
+    images: [siteConfig.seoImage]
   },
   icons: {
     icon: "/favicon.svg"
