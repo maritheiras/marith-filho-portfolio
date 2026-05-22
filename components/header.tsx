@@ -31,6 +31,7 @@ export function Header() {
     <header className={`site-header${isScrolled ? " is-scrolled" : ""}`} data-header>
       <div className="site-header-inner">
         <Link className="brand" href="/#inicio" aria-label="Voltar para o início" onClick={closeNav}>
+          <span className="brand-mark" aria-hidden="true">/</span>
           <span className="brand-text">Márith Filho</span>
         </Link>
 
