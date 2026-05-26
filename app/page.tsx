@@ -186,7 +186,7 @@ export default function HomePage() {
               </p>
             </div>
 
-            <a className="button button-secondary about-resume" href={siteConfig.resume} download>
+            <a className="button button-secondary about-resume" href={siteConfig.resume} download={siteConfig.resumeDownloadName}>
               Baixar currículo
               <DownloadIcon className="inline-icon" />
             </a>

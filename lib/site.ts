@@ -9,7 +9,8 @@ export const siteConfig = {
   phone: "5522998841370",
   github: "https://github.com/maritheiras",
   linkedin: "https://www.linkedin.com/in/marith-filho/",
-  resume: "/assets/curriculo-marith-filho.pdf"
+  resume: "/assets/Curriculo_Marith_Eiras_Scot_Filho_Dev_Software.pdf",
+  resumeDownloadName: "Curriculo_Marith_Eiras_Scot_Filho_Dev_Software.pdf"
 };
 
 export const navItems = [

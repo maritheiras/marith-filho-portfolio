@@ -42,7 +42,7 @@ export function Header() {
             </Link>
           ))}
           <div className="mobile-nav-actions" aria-label="Ações rápidas">
-            <a className="mobile-nav-resume" href={siteConfig.resume} download onClick={closeNav}>
+            <a className="mobile-nav-resume" href={siteConfig.resume} download={siteConfig.resumeDownloadName} onClick={closeNav}>
               Currículo
               <DownloadIcon className="inline-icon" />
             </a>
@@ -53,7 +53,7 @@ export function Header() {
         </nav>
 
         <div className="header-actions">
-          <a className="header-link" href={siteConfig.resume} download>
+          <a className="header-link" href={siteConfig.resume} download={siteConfig.resumeDownloadName}>
             Currículo
             <DownloadIcon className="inline-icon" />
           </a>
