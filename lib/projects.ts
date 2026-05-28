@@ -127,7 +127,7 @@ export const projects: Project[] = [
     isLive: false,
     liveUrl: "https://pegasus-site.netlify.app/",
     repoUrl: "https://github.com/maritheiras/pegasus-site",
-    isPrivate: true,
+    isPrivate: false,
     summary:
       "Site institucional com foco em apresentação de produto, composição visual e experiência responsiva.",
     build:
@@ -137,7 +137,7 @@ export const projects: Project[] = [
       "Construção responsiva para desktop e mobile.",
       "Projeto útil para demonstrar atenção a detalhe visual."
     ],
-    stacks: ["HTML", "CSS", "JavaScript"]
+    stacks: ["Next.js", "HTML", "CSS", "JavaScript"]
   },
   {
     id: "wvetro-premium-app",
