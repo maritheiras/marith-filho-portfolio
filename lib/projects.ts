@@ -122,10 +122,10 @@ export const projects: Project[] = [
     id: "pegasus-site",
     title: "Pegasus Site",
     repoName: "pegasus-site",
-    status: "Em desenvolvimento",
+    status: "No ar",
     type: "Site institucional",
-    isLive: false,
-    liveUrl: "https://pegasus-site.netlify.app/",
+    isLive: true,
+    liveUrl: "https://pegasusapp.com.br/",
     repoUrl: "https://github.com/maritheiras/pegasus-site",
     isPrivate: false,
     summary:

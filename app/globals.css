@@ -1592,6 +1592,10 @@ section[id] {
   gap: 18px;
 }
 
+.project-extra-grid {
+  padding-top: 1px;
+}
+
 .project-card {
   position: relative;
   display: flex;
@@ -1710,7 +1714,7 @@ section[id] {
 
 .project-extra-wrap.is-expanded,
 .project-extra-wrap.is-collapsing {
-  max-height: 560px;
+  max-height: 564px;
   margin-top: 18px;
   opacity: 1;
 }
