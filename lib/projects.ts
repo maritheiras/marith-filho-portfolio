@@ -125,7 +125,7 @@ export const projects: Project[] = [
     status: "No ar",
     type: "Site institucional",
     isLive: true,
-    liveUrl: "https://pegasusapp.com.br/",
+    liveUrl: "https://site.pegasusapp.com.br/",
     repoUrl: "https://github.com/maritheiras/pegasus-site",
     isPrivate: false,
     summary:
