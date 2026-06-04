@@ -11,12 +11,31 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    const updateHeader = () => setIsScrolled(window.scrollY > 50);
+    let frame: number | null = null;
+
+    const updateHeader = () => {
+      frame = null;
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    const scheduleUpdate = () => {
+      if (frame !== null) {
+        return;
+      }
+
+      frame = window.requestAnimationFrame(updateHeader);
+    };
 
     updateHeader();
-    window.addEventListener("scroll", updateHeader, { passive: true });
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
 
-    return () => window.removeEventListener("scroll", updateHeader);
+    return () => {
+      if (frame !== null) {
+        window.cancelAnimationFrame(frame);
+      }
+
+      window.removeEventListener("scroll", scheduleUpdate);
+    };
   }, []);
 
   useEffect(() => {
@@ -30,7 +49,7 @@ export function Header() {
   return (
     <header className={`site-header${isScrolled ? " is-scrolled" : ""}`} data-header>
       <div className="site-header-inner">
-        <Link className="brand" href="/#inicio" aria-label="Voltar para o início" onClick={closeNav}>
+        <Link className="brand" href="/" aria-label="Voltar para o início" onClick={closeNav}>
           <span className="brand-mark" aria-hidden="true">/</span>
           <span className="brand-text">Márith Filho</span>
         </Link>

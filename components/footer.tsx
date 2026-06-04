@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { GitHubIcon, LinkedInIcon, MailIcon } from "@/components/icons";
+import { ExternalLink } from "@/components/ui";
 import { navItems, siteConfig } from "@/lib/site";
 
 export function Footer() {
@@ -7,7 +8,7 @@ export function Footer() {
     <footer className="site-footer">
       <div className="site-footer-inner">
         <div className="footer-brand">
-          <Link className="brand" href="/#inicio" aria-label="Voltar para o início">
+          <Link className="brand" href="/" aria-label="Voltar para o início">
             <span className="brand-text">{siteConfig.name}</span>
           </Link>
           <p>Sistemas, automações e produtos digitais com foco em operação real.</p>
@@ -25,12 +26,12 @@ export function Footer() {
           <a href={`mailto:${siteConfig.email}`} aria-label="Enviar e-mail para Márith Filho">
             <MailIcon className="line-svg" />
           </a>
-          <a href={siteConfig.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn de Márith Filho">
+          <ExternalLink href={siteConfig.linkedin} aria-label="LinkedIn de Márith Filho, abre em nova aba">
             <LinkedInIcon />
-          </a>
-          <a href={siteConfig.github} target="_blank" rel="noreferrer" aria-label="GitHub de Márith Filho">
+          </ExternalLink>
+          <ExternalLink href={siteConfig.github} aria-label="GitHub de Márith Filho, abre em nova aba">
             <GitHubIcon />
-          </a>
+          </ExternalLink>
         </div>
       </div>
 

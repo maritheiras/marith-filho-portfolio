@@ -1,59 +1,28 @@
-import type { Metadata } from "next";
 import { ContactButton } from "@/components/contact-provider";
-import { ExperienceTimeline } from "@/components/experience-timeline";
+import { AboutSummary } from "@/components/about-summary";
+import { ExperienceShowcase } from "@/components/experience-showcase";
 import { HeroSocials } from "@/components/hero-socials";
-import { DownloadIcon } from "@/components/icons";
 import { ProjectGrid } from "@/components/project-grid";
 import { StackMarquee } from "@/components/stack-marquee";
 import { projects, visibleProjectCount } from "@/lib/projects";
+import { absoluteUrl, createPageMetadata, getSiteUrl } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: {
-    absolute: siteConfig.title
-  },
-  alternates: {
-    canonical: "/"
-  }
-};
+const siteUrl = getSiteUrl();
 
-const experiences = [
-  {
-    side: "right",
-    current: true,
-    company: "@ AUTÔNOMO",
-    status: "Atual",
-    title: "Desenvolvedor de Software Full Stack",
-    location: "Brasil · Remoto · Projetos próprios",
-    description: "Projetos web e multiplataforma, incluindo requisitos, interface, APIs, dados e deploy.",
-    badges: ["2024 — Atual", "Full stack", "Produto digital"]
-  },
-  {
-    side: "left",
-    company: "@ SERRALHERIA SANTA VERONICA",
-    title: "Assistente de Implantação de Sistemas e Processos",
-    location: "Brasil · Presencial · Processos operacionais",
-    description: "Implantação do WVETRO em áreas operacionais, com foco em organização e adoção do sistema.",
-    badges: ["2023 — 2024", "Implantação", "Sistemas"]
-  },
-  {
-    side: "right",
-    company: "@ PROGEN S.A. E ENGEFORM",
-    title: "Produtividade, faturamento e dados operacionais",
-    location: "Brasil · Presencial · Operações e dados",
-    description: "Controle de produtividade, faturamento, prazos e dados operacionais em contratos ligados à ENEL.",
-    badges: ["2017 — 2022", "Dados", "Controle operacional"]
-  }
-];
+export const metadata = createPageMetadata({
+  absoluteTitle: siteConfig.title,
+  path: "/"
+});
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Person",
-      "@id": `${siteConfig.url}/#person`,
+      "@id": `${siteUrl}/#person`,
       name: "Márith Filho",
-      url: siteConfig.url,
+      url: siteUrl,
       email: siteConfig.email,
       jobTitle: "Desenvolvedor de Software Full Stack",
       alumniOf: "Instituto Federal Fluminense",
@@ -61,22 +30,23 @@ const jsonLd = {
     },
     {
       "@type": "WebSite",
-      "@id": `${siteConfig.url}/#website`,
+      "@id": `${siteUrl}/#website`,
       name: "Márith Filho Portfolio",
-      url: siteConfig.url,
+      url: siteUrl,
+      description: siteConfig.description,
       inLanguage: "pt-BR",
       author: {
-        "@id": `${siteConfig.url}/#person`
+        "@id": `${siteUrl}/#person`
       }
     },
     {
       "@type": "ItemList",
-      "@id": `${siteConfig.url}/#projects`,
+      "@id": `${siteUrl}/#projects`,
       name: "Projetos de software de Márith Filho",
       itemListElement: projects.map((project, index) => ({
         "@type": "ListItem",
         position: index + 1,
-        url: `${siteConfig.url}/projetos/${project.id}`,
+        url: absoluteUrl(`/projetos/${project.id}`),
         name: project.title,
         description: project.summary
       }))
@@ -121,32 +91,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <ExperienceTimeline experiences={experiences} />
-
-        <div className="experience-timeline experience-timeline-static">
-          {experiences.map((experience) => (
-            <article
-              className={`experience-card experience-card-${experience.side}${experience.current ? " is-current" : ""}`}
-              key={experience.title}
-            >
-              <span className="experience-node" aria-hidden="true" />
-              <div className="experience-card-inner">
-                <div className="experience-card-top">
-                  <span className="experience-company">{experience.company}</span>
-                  {experience.status ? <span className="experience-status">{experience.status}</span> : null}
-                </div>
-                <h3>{experience.title}</h3>
-                <p className="experience-location">{experience.location}</p>
-                <p>{experience.description}</p>
-                <div className="experience-badges" aria-label="Contexto da experiência">
-                  {experience.badges.map((badge) => (
-                    <span key={badge}>{badge}</span>
-                  ))}
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
+        <ExperienceShowcase />
       </section>
 
       <section className="section-shell section-block" id="projetos">
@@ -168,30 +113,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="about-content">
-          <div className="about-portrait-wrap">
-            <img className="about-portrait" src="/assets/foto-perfil-seo.jpeg" alt="Foto de Márith Filho" />
-          </div>
-
-          <div className="about-details">
-            <div className="about-text">
-              <p>
-                Me chamo <strong>Márith Eiras Scot Filho</strong>, sou Bacharel em Sistemas de Informação pelo
-                Instituto Federal Fluminense e sigo aprofundando minha formação em <strong>desenvolvimento de sistemas</strong>,{" "}
-                engenharia de software e soluções digitais.
-              </p>
-              <p>
-                Meu foco profissional está em transformar necessidades reais em produtos web, <strong>automações</strong> e
-                sistemas bem estruturados, com atenção para usabilidade, organização de dados e evolução contínua.
-              </p>
-            </div>
-
-            <a className="button button-secondary about-resume" href={siteConfig.resume} download={siteConfig.resumeDownloadName}>
-              Baixar currículo
-              <DownloadIcon className="inline-icon" />
-            </a>
-          </div>
-        </div>
+        <AboutSummary />
       </section>
 
       <section className="section-shell contact-section" id="contato">

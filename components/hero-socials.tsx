@@ -1,4 +1,5 @@
 import { GitHubIcon, LinkedInIcon, MailIcon } from "@/components/icons";
+import { ExternalLink } from "@/components/ui";
 import { siteConfig } from "@/lib/site";
 
 export function HeroSocials() {
@@ -7,12 +8,12 @@ export function HeroSocials() {
       <a className="hero-social-mail" href={`mailto:${siteConfig.email}`} aria-label="Enviar e-mail para Márith Filho">
         <MailIcon className="line-svg" />
       </a>
-      <a className="hero-social-linkedin" href={siteConfig.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn de Márith Filho">
+      <ExternalLink className="hero-social-linkedin" href={siteConfig.linkedin} aria-label="LinkedIn de Márith Filho, abre em nova aba">
         <LinkedInIcon />
-      </a>
-      <a className="hero-social-github" href={siteConfig.github} target="_blank" rel="noreferrer" aria-label="GitHub de Márith Filho">
+      </ExternalLink>
+      <ExternalLink className="hero-social-github" href={siteConfig.github} aria-label="GitHub de Márith Filho, abre em nova aba">
         <GitHubIcon />
-      </a>
+      </ExternalLink>
     </div>
   );
 }

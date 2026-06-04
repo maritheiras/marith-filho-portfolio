@@ -4,11 +4,12 @@ import { ContactProvider } from "@/components/contact-provider";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { ScrollReveal } from "@/components/scroll-reveal";
+import { getSeoImageUrl, getSiteUrl } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? siteConfig.url;
-const seoImageUrl = new URL(siteConfig.seoImage, siteUrl).toString();
+const siteUrl = getSiteUrl();
+const seoImageUrl = getSeoImageUrl();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -57,8 +58,15 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [seoImageUrl]
   },
+  manifest: "/manifest.webmanifest",
   icons: {
-    icon: "/favicon.svg"
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-48.png", sizes: "48x48", type: "image/png" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" }
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }]
   },
   robots: {
     index: true,
@@ -82,6 +90,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="pt-BR">
+      <head>
+        <link rel="preconnect" href="https://cdn.simpleicons.org" />
+        <link rel="dns-prefetch" href="https://cdn.simpleicons.org" />
+      </head>
       <body>
         <ContactProvider>
           <Header />

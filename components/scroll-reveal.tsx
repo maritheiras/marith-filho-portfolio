@@ -84,8 +84,15 @@ export function ScrollReveal() {
         element.style.setProperty("--reveal-delay", revealDelayFor(element));
         element.classList.add("scroll-reveal");
 
-        if (reducedMotion || isInRevealZone(element)) {
+        if (reducedMotion) {
           element.classList.add("is-visible");
+          return;
+        }
+
+        if (isInRevealZone(element)) {
+          window.requestAnimationFrame(() => {
+            element.classList.add("is-visible");
+          });
           return;
         }
 

@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { CheckIcon, CloseIcon, CopyIcon, ExternalIcon, GitHubIcon, LinkedInIcon, MailIcon, WhatsAppIcon } from "@/components/icons";
+import { ExternalLink } from "@/components/ui";
 import { siteConfig } from "@/lib/site";
 
 type ContactContextValue = {
@@ -98,24 +99,24 @@ export function ContactProvider({ children }: { children: ReactNode }) {
         </div>
 
         <div className="contact-card-grid">
-          <a className="contact-card" href={`https://wa.me/${siteConfig.phone}`} target="_blank" rel="noreferrer">
+          <ExternalLink className="contact-card" href={`https://wa.me/${siteConfig.phone}`} aria-label="WhatsApp de Márith Filho, abre em nova aba">
             <span className="contact-icon-chip contact-icon-whatsapp">
               <WhatsAppIcon />
             </span>
             <span>WhatsApp</span>
-          </a>
-          <a className="contact-card" href={siteConfig.linkedin} target="_blank" rel="noreferrer">
+          </ExternalLink>
+          <ExternalLink className="contact-card" href={siteConfig.linkedin} aria-label="LinkedIn de Márith Filho, abre em nova aba">
             <span className="contact-icon-chip contact-icon-linkedin">
               <LinkedInIcon />
             </span>
             <span>LinkedIn</span>
-          </a>
-          <a className="contact-card" href={siteConfig.github} target="_blank" rel="noreferrer">
+          </ExternalLink>
+          <ExternalLink className="contact-card" href={siteConfig.github} aria-label="GitHub de Márith Filho, abre em nova aba">
             <span className="contact-icon-chip contact-icon-github">
               <GitHubIcon />
             </span>
             <span>GitHub</span>
-          </a>
+          </ExternalLink>
         </div>
       </div>
     </ContactContext.Provider>

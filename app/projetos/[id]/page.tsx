@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ExternalLink } from "@/components/ui";
 import { getProject, projects } from "@/lib/projects";
+import { absoluteUrl, createPageMetadata, getSiteUrl } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 import { StackList } from "@/lib/stacks";
 
@@ -11,8 +13,7 @@ type ProjectPageProps = {
   }>;
 };
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? siteConfig.url;
-const seoImageUrl = new URL(siteConfig.seoImage, siteUrl).toString();
+const siteUrl = getSiteUrl();
 
 export function generateStaticParams() {
   return projects.map((project) => ({
@@ -30,34 +31,13 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
     };
   }
 
-  return {
+  return createPageMetadata({
     title: project.title,
     description: project.summary,
-    alternates: {
-      canonical: `/projetos/${project.id}`
-    },
-    openGraph: {
-      type: "article",
-      url: `${siteUrl}/projetos/${project.id}`,
-      title: `${project.title} | Márith Filho`,
-      description: project.summary,
-      siteName: "Márith Filho Portfolio",
-      images: [
-        {
-          url: seoImageUrl,
-          width: 1200,
-          height: 630,
-          alt: project.title
-        }
-      ]
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${project.title} | Márith Filho`,
-      description: project.summary,
-      images: [seoImageUrl]
-    }
-  };
+    path: `/projetos/${project.id}`,
+    type: "article",
+    imageAlt: project.title
+  });
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
@@ -73,7 +53,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     "@type": "CreativeWork",
     name: project.title,
     description: project.summary,
-    url: `${siteUrl}/projetos/${project.id}`,
+    url: absoluteUrl(`/projetos/${project.id}`),
     author: {
       "@type": "Person",
       name: "Márith Filho",
@@ -84,9 +64,35 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     sameAs: [project.liveUrl, project.repoUrl].filter(Boolean)
   };
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Início",
+        item: siteUrl
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Projetos",
+        item: absoluteUrl("/#projetos")
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: project.title,
+        item: absoluteUrl(`/projetos/${project.id}`)
+      }
+    ]
+  };
+
   return (
     <main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
       <section className="section-shell project-detail-hero">
         <Link className="project-back" href="/#projetos">
@@ -99,14 +105,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <p>{project.summary}</p>
         <div className="project-detail-actions">
           {project.liveUrl ? (
-            <a className="button button-primary" href={project.liveUrl} target="_blank" rel="noreferrer">
+            <ExternalLink className="button button-primary" href={project.liveUrl} aria-label={`${project.title}, abre em nova aba`}>
               Acessar projeto
-            </a>
+            </ExternalLink>
           ) : null}
           {project.repoUrl && !project.isPrivate ? (
-            <a className="button button-secondary" href={project.repoUrl} target="_blank" rel="noreferrer">
+            <ExternalLink className="button button-secondary" href={project.repoUrl} aria-label={`Repositório ${project.title}, abre em nova aba`}>
               Ver repositório
-            </a>
+            </ExternalLink>
           ) : null}
           {project.repoUrl && project.isPrivate ? (
             <span className="button button-secondary project-disabled-action">Repositório privado</span>
