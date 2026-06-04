@@ -10,6 +10,7 @@ import "./globals.css";
 
 const siteUrl = getSiteUrl();
 const seoImageUrl = getSeoImageUrl();
+const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -58,6 +59,11 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [seoImageUrl]
   },
+  verification: googleSiteVerification
+    ? {
+        google: googleSiteVerification
+      }
+    : undefined,
   manifest: "/manifest.webmanifest",
   icons: {
     icon: [

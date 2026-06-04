@@ -19,3 +19,26 @@ export const navItems = [
   { label: "Projetos", href: "/#projetos" },
   { label: "Contatos", href: "/#contato" }
 ];
+
+export const searchSections = [
+  {
+    name: "Sobre",
+    url: "/#sobre",
+    description: "Resumo pessoal, formação e foco profissional de Márith Filho."
+  },
+  {
+    name: "Experiência profissional",
+    url: "/#experiencia",
+    description: "Trajetória profissional conectando implantação de sistemas, dados e desenvolvimento de produtos digitais."
+  },
+  {
+    name: "Projetos reais",
+    url: "/#projetos",
+    description: "Projetos publicados e repositórios com sistemas, automação e produtos digitais."
+  },
+  {
+    name: "Contatos",
+    url: "/#contato",
+    description: "Formas de contato profissional, LinkedIn, GitHub e e-mail."
+  }
+];

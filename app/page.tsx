@@ -5,8 +5,8 @@ import { HeroSocials } from "@/components/hero-socials";
 import { ProjectGrid } from "@/components/project-grid";
 import { StackMarquee } from "@/components/stack-marquee";
 import { projects, visibleProjectCount } from "@/lib/projects";
-import { absoluteUrl, createPageMetadata, getSiteUrl } from "@/lib/seo";
-import { siteConfig } from "@/lib/site";
+import { absoluteUrl, createPageMetadata, getSeoImageUrl, getSiteUrl } from "@/lib/seo";
+import { searchSections, siteConfig } from "@/lib/site";
 
 const siteUrl = getSiteUrl();
 
@@ -39,6 +39,37 @@ const jsonLd = {
         "@id": `${siteUrl}/#person`
       }
     },
+    {
+      "@type": "WebPage",
+      "@id": `${siteUrl}/#webpage`,
+      url: siteUrl,
+      name: siteConfig.title,
+      description: siteConfig.description,
+      inLanguage: "pt-BR",
+      isPartOf: {
+        "@id": `${siteUrl}/#website`
+      },
+      about: {
+        "@id": `${siteUrl}/#person`
+      },
+      primaryImageOfPage: {
+        "@type": "ImageObject",
+        url: getSeoImageUrl()
+      },
+      hasPart: searchSections.map((section) => ({
+        "@type": "WebPageElement",
+        "@id": absoluteUrl(section.url),
+        name: section.name,
+        description: section.description,
+        url: absoluteUrl(section.url)
+      }))
+    },
+    ...searchSections.map((section) => ({
+      "@type": "SiteNavigationElement",
+      name: section.name,
+      description: section.description,
+      url: absoluteUrl(section.url)
+    })),
     {
       "@type": "ItemList",
       "@id": `${siteUrl}/#projects`,
