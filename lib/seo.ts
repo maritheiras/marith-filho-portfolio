@@ -13,7 +13,10 @@ type PageMetadataInput = {
   description?: string;
   path?: string;
   type?: "website" | "article";
+  image?: string;
   imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
 };
 
 export function getSiteUrl() {
@@ -34,11 +37,15 @@ export function createPageMetadata({
   description = siteConfig.description,
   path = "/",
   type = "website",
-  imageAlt = defaultOgImage.alt
+  image,
+  imageAlt = defaultOgImage.alt,
+  imageWidth = defaultOgImage.width,
+  imageHeight = defaultOgImage.height
 }: PageMetadataInput = {}): Metadata {
   const pageUrl = absoluteUrl(path);
   const metadataTitle = absoluteTitle ? { absolute: absoluteTitle } : title;
   const openGraphTitle = absoluteTitle ?? (title ? `${title} | Márith Filho` : siteConfig.title);
+  const imageUrl = image ? absoluteUrl(image) : getSeoImageUrl();
 
   return {
     title: metadataTitle,
@@ -55,9 +62,9 @@ export function createPageMetadata({
       siteName: "Márith Filho Portfolio",
       images: [
         {
-          url: getSeoImageUrl(),
-          width: defaultOgImage.width,
-          height: defaultOgImage.height,
+          url: imageUrl,
+          width: imageWidth,
+          height: imageHeight,
           alt: imageAlt
         }
       ]
@@ -66,7 +73,7 @@ export function createPageMetadata({
       card: "summary_large_image",
       title: openGraphTitle,
       description,
-      images: [getSeoImageUrl()]
+      images: [imageUrl]
     },
     robots: {
       index: true,

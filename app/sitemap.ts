@@ -15,6 +15,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 1
     },
+    {
+      url: `${siteUrl}/sites-precos`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.7
+    },
     ...projects.map((project) => ({
       url: `${siteUrl}/projetos/${project.id}`,
       lastModified: now,

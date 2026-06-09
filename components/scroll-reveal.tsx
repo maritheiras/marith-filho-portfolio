@@ -16,7 +16,12 @@ const revealSelector = [
   ".project-detail-hero h1",
   ".project-detail-hero p",
   ".project-detail-actions",
-  ".project-detail-panel"
+  ".project-detail-panel",
+  ".pricing-plan-card",
+  ".pricing-value-card",
+  ".pricing-upgrade-card",
+  ".pricing-note-panel",
+  ".pricing-cta-panel"
 ].join(",");
 
 function revealDelayFor(element: HTMLElement) {
