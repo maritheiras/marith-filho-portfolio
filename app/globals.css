@@ -173,6 +173,7 @@ h1 {
 
 h2 {
   margin-bottom: 0;
+  padding: 0.04em 0 0.08em;
   background: linear-gradient(180deg, #ffffff 0%, #f4f4f5 45%, #a1a1aa 100%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -187,6 +188,7 @@ h2 {
 h1.section-title {
   max-width: none;
   margin: 0;
+  padding: 0.04em 0 0.08em;
   background: linear-gradient(180deg, #ffffff 0%, #f4f4f5 45%, #a1a1aa 100%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -2202,13 +2204,15 @@ section[id] {
 }
 
 .pricing-page {
-  padding: 150px 0 96px;
+  padding: 0 0 96px;
 }
 
 .pricing-hero {
   display: grid;
+  align-content: center;
   justify-items: center;
-  padding: 26px 0 72px;
+  min-height: 100vh;
+  padding: 150px 0 120px;
   text-align: center;
 }
 
@@ -3700,11 +3704,13 @@ section[id] {
 
 @media (max-width: 760px) {
   .pricing-page {
-    padding: 118px 0 72px;
+    padding: 0 0 72px;
   }
 
   .pricing-hero {
-    padding: 12px 0 42px;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: 104px 0 80px;
   }
 
   .pricing-hero-copy {
@@ -3730,6 +3736,23 @@ section[id] {
   .pricing-note-panel,
   .pricing-cta-panel {
     padding: 24px;
+  }
+
+  .pricing-upgrade-card {
+    display: grid;
+    align-content: center;
+    min-height: 178px;
+    padding: 24px 24px 26px;
+  }
+
+  .pricing-upgrade-card h3 {
+    margin-bottom: 10px;
+    line-height: 1.22;
+  }
+
+  .pricing-upgrade-card p {
+    font-size: 15px;
+    line-height: 1.56;
   }
 
   .pricing-value-board-desktop {
